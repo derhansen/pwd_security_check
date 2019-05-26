@@ -1,0 +1,72 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:psc="http://typo3.org/ns/Derhansen/PwdSecurityCheck/ViewHelpers/Be">
+
+<h3><f:translate key="report_type.{report_type}.title" /></h3>
+
+<h3><f:translate key="mode.0.title" /></h3>
+
+<f:if condition="!{data.mode-0.checked}">
+  <f:then>
+    <f:render partial="NeverChecked" arguments="{mode: 0}" />
+  </f:then>
+  <f:else>
+    <p>
+      <f:translate key="title.last_check" /> {data.mode-0.lastCheck -> f:format.date(format: 'd.m.Y H:i:s')}
+    </p>
+    <f:if condition="{data.mode-0.users}">
+      <f:then>
+        <f:render partial="SecurityNotice" arguments="{amountPasswords: data.mode-0.amountPasswords}"/>
+        <f:render partial="UserResults" arguments="{users: data.mode-0.users, table: 'be_users', lastCheck: data.mode-0.lastCheck}"/>
+      </f:then>
+      <f:else>
+        <f:render partial="NoUsersFound" arguments="{amountPasswords: data.mode-0.amountPasswords}"/>
+      </f:else>
+    </f:if>
+  </f:else>
+</f:if>
+
+<h3><f:translate key="mode.1.title" /></h3>
+
+<f:if condition="!{data.mode-1.checked}">
+  <f:then>
+    <f:render partial="NeverChecked" arguments="{mode: 1}" />
+  </f:then>
+  <f:else>
+    <p>
+      <f:translate key="title.last_check" /> {data.mode-1.lastCheck -> f:format.date(format: 'd.m.Y H:i:s')}
+    </p>
+    <f:if condition="{data.mode-1.users}">
+      <f:then>
+        <f:render partial="SecurityNotice" arguments="{amountPasswords: data.mode-1.amountPasswords}"/>
+        <f:render partial="UserResults" arguments="{users: data.mode-1.users, table: 'be_users', lastCheck: data.mode-1.lastCheck}"/>
+      </f:then>
+      <f:else>
+        <f:render partial="NoUsersFound" arguments="{amountPasswords: data.mode-1.amountPasswords}"/>
+      </f:else>
+    </f:if>
+  </f:else>
+</f:if>
+
+<h3><f:translate key="mode.2.title" /></h3>
+
+<f:if condition="!{data.mode-2.checked}">
+  <f:then>
+    <f:render partial="NeverChecked" arguments="{mode: 2}" />
+  </f:then>
+  <f:else>
+    <p>
+      <f:translate key="title.last_check" /> {data.mode-2.lastCheck -> f:format.date(format: 'd.m.Y H:i:s')}
+    </p>
+    <f:if condition="{data.mode-2.users}">
+      <f:then>
+        <f:render partial="SecurityNotice" arguments="{amountPasswords: data.mode-2.amountPasswords}"/>
+        <f:render partial="UserResults" arguments="{users: data.mode-2.users, table: 'fe_users', lastCheck: data.mode-2.lastCheck}"/>
+      </f:then>
+      <f:else>
+        <f:render partial="NoUsersFound" arguments="{amountPasswords: data.mode-2.amountPasswords}"/>
+      </f:else>
+    </f:if>
+  </f:else>
+</f:if>
+
+</html>

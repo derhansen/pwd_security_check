@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.0" xmlns:t3="http://typo3.org/schemas/xliff">
+	<file  source-language="en" datatype="plaintext" original="messages" date="2019-05-24T14:22:10Z" product-name="pwd_security_check">
+		<header/>
+		<body>
+			<trans-unit id="title.last_check">
+				<source>Last check:</source>
+			</trans-unit>
+			<trans-unit id="title.security_notice">
+				<source>Security Notice!</source>
+			</trans-unit>
+			<trans-unit id="title.check_results">
+				<source>Check Results</source>
+			</trans-unit>
+			<trans-unit id="title.never_checked">
+				<source>Never Checked</source>
+			</trans-unit>
+			<trans-unit id="message.passwords_found">
+				<source>The following users have a password that is found in the top %1$s popular passwords. Please update the password of the found users to a strong password.</source>
+			</trans-unit>
+			<trans-unit id="message.no_passwords_found">
+				<source>No users found with a password matching the top %1$s popular passwords.</source>
+			</trans-unit>
+			<trans-unit id="message.never_checked">
+				<source>This check has never run. Please execute the Symfony Console command - Example: `bin/typo3 pwd_security_check:process %1$s`.</source>
+			</trans-unit>
+
+			<trans-unit id="mode.0.title">
+				<source>Backend Admin Users with passwords found in the password file</source>
+			</trans-unit>
+			<trans-unit id="mode.1.title">
+				<source>Backend Users with passwords found in the password file</source>
+			</trans-unit>
+			<trans-unit id="mode.2.title">
+				<source>Frontend Users passwords found in the password file</source>
+			</trans-unit>
+
+			<trans-unit id="report.title">
+				<source>Password Security Report</source>
+			</trans-unit>
+			<trans-unit id="report.description">
+				<source>Shows the result of the Password Security Check for TYPO3 Backend and Frontend Users</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
