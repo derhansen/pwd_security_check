@@ -221,7 +221,7 @@ class ProcessCommand extends Command
             default:
                 $userType = 'Backend Admins';
         }
-        $message = 'The following ' . $userType . ' users have a password found in the polular password file:';
+        $message = 'The following ' . $userType . ' users have a password found in the popular password file:';
         $message .= CRLF . CRLF;
         $subject = 'Password Check results for ' . $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'];
 
