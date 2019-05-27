@@ -1,0 +1,39 @@
+{
+  "name": "derhansen/pwd_security_check",
+  "type": "typo3-cms-extension",
+  "description": "TYPO3 Extension with a Symfony Console Command to check TYPO3 Backend and Frontend user passwords against a list of popular passwords. ",
+  "homepage": "https://github.com/derhansen/pwd_security_check",
+  "support": {
+    "issues": "https://github.com/derhansen/pwd_security_check/issues"
+  },
+  "authors": [
+    {
+      "name": "Torben Hansen",
+      "email": "derhansen@gmail.com",
+      "homepage": "https://www.derhansen.com",
+      "role": "Developer"
+    }
+  ],
+  "keywords": ["TYPO3 CMS", "password security", "popular passwords"],
+  "license": [
+    "GPL-2.0+"
+  ],
+  "require": {
+    "php": "^7.0",
+    "typo3/cms-core": "^8.7 || ^9.5"
+  },
+  "replace": {
+    "pwd_security_check": "self.version",
+    "typo3-ter/pwd-security-check": "self.version"
+  },
+  "autoload": {
+    "psr-4": {
+      "Derhansen\\PwdSecurityCheck\\": "Classes"
+    }
+  },
+  "extra": {
+    "typo3/cms": {
+      "cms-package-dir": "{$vendor-dir}/typo3/cms"
+    }
+  }
+}

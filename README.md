@@ -52,7 +52,7 @@ Command arguments:
 Command options:
 
 * `-a` Amount of passwords to check from passwords file. Warning: Higher value = longer check. [default: 100]
-* `f` Absolute path to password file (EXT: notation allowed) [default: "EXT:pwd_security_check/Resources/Private/Text/popular_passwords.txt"]
+* `-f` Absolute path to password file (EXT: notation allowed) [default: "EXT:pwd_security_check/Resources/Private/Text/popular_passwords.txt"]
 
 ### TYPO3 Scheduler Support
 
