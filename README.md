@@ -3,14 +3,14 @@ Password Security Check for TYPO3
 
 ## What is it?
 
-Since it is not possible out of the box in TYPO3 to define password complexity rules or a password lifetime for 
-passwords of Backend and Frontend users, some users may choose very easy passwords for their user accounts.
-Especially for TYPO3 Backend Admin accounts, this can be dangerous, since it will be more easy for attackers 
-using brute force techniques to get access to the TYPO3 backend in this case.
+Since it is not possible out of the box in TYPO3 to define password complexity rules of Backend and Frontend users, 
+some users may choose very easy passwords for their user accounts. Especially for TYPO3 Backend Admin accounts, this 
+can be dangerous, since it will be more easy for attackers using brute force techniques to get access to the TYPO3 
+backend in this case.
 
-Goal of the extension is to get notified about TYPO3 Backend or Frontend users, who use a password that is found 
-in a given list of popular passwords. The extension ships with a list of 10.000 most popular passwords used, but you
-can also use your own list (e.g. list with top passwords in local language).  
+This extension can help to get an overview or to get notified about TYPO3 Backend or Frontend users, who use a password 
+that is found in a given list of popular passwords. The extension ships with a list of 10.000 most popular passwords 
+used, but you can also use your own list (e.g. list with top passwords in local language).  
 
 ## Screenshots
 

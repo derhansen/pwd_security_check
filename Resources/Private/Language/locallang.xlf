@@ -32,7 +32,7 @@
 				<source>Backend Users with passwords found in the password file</source>
 			</trans-unit>
 			<trans-unit id="mode.2.title">
-				<source>Frontend Users passwords found in the password file</source>
+				<source>Frontend Users with passwords found in the password file</source>
 			</trans-unit>
 
 			<trans-unit id="report.title">
