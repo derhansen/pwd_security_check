@@ -2,7 +2,7 @@
 $EM_CONF[$_EXTKEY] = [
     'title' => 'Password Security Check',
     'description' => 'Symfony Command and System Report to check BE and FE user passwords against a list of popular passwords',
-    'category' => 'module',
+    'category' => 'be',
     'author' => 'Torben Hansen',
     'author_email' => 'derhansen@gmail.com',
     'author_company' => '',
