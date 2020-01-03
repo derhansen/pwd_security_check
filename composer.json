@@ -16,7 +16,7 @@
   ],
   "keywords": ["TYPO3 CMS", "password security", "popular passwords"],
   "license": [
-    "GPL-2.0+"
+    "GPL-2.0-or-later"
   ],
   "require": {
     "php": "^7.0",
