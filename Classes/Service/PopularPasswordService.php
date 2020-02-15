@@ -105,7 +105,7 @@ class PopularPasswordService
     }
 
     /**
-     * Returns the hashing instance (TYPO3 8.7 and 9.5)
+     * Returns the hashing instance
      *
      * @return \TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashInterface|null
      * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
@@ -117,8 +117,6 @@ class PopularPasswordService
         if (class_exists(PasswordHashFactory::class)) {
             $hashInstance = GeneralUtility::makeInstance(PasswordHashFactory::class)
                 ->getDefaultHashInstance($this->checkMode);
-        } elseif (SaltedPasswordsUtility::isUsageEnabled($this->checkMode)) {
-            $hashInstance = SaltFactory::getSaltingInstance();
         }
 
         return $hashInstance;
