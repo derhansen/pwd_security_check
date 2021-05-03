@@ -160,6 +160,8 @@ class ProcessCommand extends Command
         } else {
             $io->success('All done!');
         }
+        
+        return 0;
     }
 
     /**
