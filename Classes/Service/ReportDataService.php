@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace Derhansen\PwdSecurityCheck\Service;
 
 /*
@@ -20,15 +22,8 @@ class ReportDataService
     const REGISTRY_NAMESPACE = 'tx_pwdsecuritycheck';
     const REGISTRY_KEY = 'reportData';
 
-    /**
-     * @var Registry
-     */
-    protected $registry = null;
-
-    /**
-     * @var array
-     */
-    protected $defaultData = [
+    protected ?Registry $registry = null;
+    protected array $defaultData = [
         'mode-0' => [
             'checked' => false,
             'lastCheck' => 0,

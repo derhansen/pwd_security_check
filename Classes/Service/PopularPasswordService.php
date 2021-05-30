@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace Derhansen\PwdSecurityCheck\Service;
 
 /*
@@ -10,6 +12,7 @@ namespace Derhansen\PwdSecurityCheck\Service;
  */
 
 use TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashFactory;
+use TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
@@ -28,19 +31,8 @@ class PopularPasswordService
     const TABLE_FE_USERS = 'fe_users';
     const TABLE_BE_USERS = 'be_users';
 
-    /**
-     * Current mode
-     *
-     * @var int
-     */
-    protected $mode = 0;
-
-    /**
-     * Current checkMode
-     *
-     * @var string
-     */
-    protected $checkMode = 'BE';
+    protected int $mode = 0;
+    protected string $checkMode = 'BE';
 
     /**
      * PopularPasswordService constructor.
@@ -110,7 +102,7 @@ class PopularPasswordService
      * @return \TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashInterface|null
      * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
      */
-    public function getHashInstance()
+    public function getHashInstance(): ?PasswordHashInterface
     {
         $hashInstance = null;
 

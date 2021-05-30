@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types = 1);
+
 namespace Derhansen\PwdSecurityCheck\Reports;
 
 /*
@@ -20,15 +22,8 @@ use TYPO3\CMS\Reports\ReportInterface;
  */
 class PasswordSecurityCheckReport implements ReportInterface
 {
-    /**
-     * @var ReportController
-     */
-    protected $reportsModule;
-
-    /**
-     * @var ReportDataService
-     */
-    protected $reportDataService = null;
+    protected ?ReportController $reportsModule;
+    protected ?ReportDataService $reportDataService = null;
 
     /**
      * Constructor
@@ -46,7 +41,7 @@ class PasswordSecurityCheckReport implements ReportInterface
      *
      * @return string The status report as HTML
      */
-    public function getReport()
+    public function getReport(): string
     {
         $view = $this->getStandaloneView();
         $view->assignMultiple([

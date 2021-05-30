@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types = 1);
+
 namespace Derhansen\PwdSecurityCheck\Command;
 
 /*
@@ -25,15 +27,10 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Command to check the password of TYPO3 backend or frontend users against a given list of popular passwords
- *
- * @author Torben Hansen <derhansen@gmail.com>
  */
 class ProcessCommand extends Command
 {
-    /**
-     * @var array
-     */
-    protected $allowedModes = [0, 1, 2];
+    protected array $allowedModes = [0, 1, 2];
 
     /**
      * Configuring the command options
@@ -237,11 +234,7 @@ class ProcessCommand extends Command
         $mail = GeneralUtility::makeInstance(MailMessage::class);
         $mail->setTo($recipients);
         $mail->setSubject($subject);
-        if (GeneralUtility::makeInstance(Typo3Version::class)->getMajorVersion() === 10) {
-            $mail->text($message);
-        } else {
-            $mail->setBody($message);
-        }
+        $mail->text($message);
         $mail->send();
     }
 }
