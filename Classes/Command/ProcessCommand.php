@@ -19,6 +19,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -236,7 +237,11 @@ class ProcessCommand extends Command
         $mail = GeneralUtility::makeInstance(MailMessage::class);
         $mail->setTo($recipients);
         $mail->setSubject($subject);
-        $mail->setBody($message);
+        if (GeneralUtility::makeInstance(Typo3Version::class)->getMajorVersion() === 10) {
+            $mail->text($message);
+        } else {
+            $mail->setBody($message);
+        }
         $mail->send();
     }
 }
