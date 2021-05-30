@@ -11,4 +11,4 @@ services:
         tags:
             - name: 'console.command'
               command: 'pwd_security_check:process'
-              schedulable: True
+              schedulable: true
