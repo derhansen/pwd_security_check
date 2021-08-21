@@ -4,7 +4,7 @@ defined('TYPO3') or die();
 
 call_user_func(
     function () {
-        if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['reports']['tx_pwdsecuritycheck'])) {
+        if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['reports']['tx_pwdsecuritycheck'] ?? null)) {
             $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['reports']['tx_pwdsecuritycheck'] = [];
         }
 
