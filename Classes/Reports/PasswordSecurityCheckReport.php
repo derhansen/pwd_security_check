@@ -60,7 +60,7 @@ class PasswordSecurityCheckReport implements ReportInterface
     {
         // Rendering of the output via fluid
         $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->getRequest()->setControllerExtensionName('pwd_security_check');
+        $view->getRequest()->setControllerExtensionName('PwdSecurityCheck');
         $view->setPartialRootPaths(['EXT:pwd_security_check/Resources/Private/Partials/']);
         $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName(
             'EXT:pwd_security_check/Resources/Private/Templates/Report.html'
