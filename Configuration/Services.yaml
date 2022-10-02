@@ -11,4 +11,5 @@ services:
         tags:
             - name: 'console.command'
               command: 'pwd_security_check:process'
+              description: 'Checks passwords of TYPO3 backend or frontend users against a file with popular password'
               schedulable: true

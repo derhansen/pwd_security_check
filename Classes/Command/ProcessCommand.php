@@ -21,7 +21,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use TYPO3\CMS\Core\Information\Typo3Version;
 use TYPO3\CMS\Core\Mail\MailMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -38,7 +37,6 @@ class ProcessCommand extends Command
     public function configure()
     {
         $this
-            ->setDescription('Checks passwords of TYPO3 backend or frontend users against a file with popular password')
             ->addArgument(
                 'mode',
                 InputArgument::REQUIRED,
@@ -81,7 +79,7 @@ class ProcessCommand extends Command
         $io->title($this->getDescription());
 
         $mode = (int)$input->getArgument('mode');
-        if (!in_array($mode, $this->allowedModes)) {
+        if (!in_array($mode, $this->allowedModes, true)) {
             $mode = 0;
         }
 
@@ -223,7 +221,7 @@ class ProcessCommand extends Command
         }
         $message = 'The following ' . $userType . ' users have a password found in the popular password file:';
         $message .= CRLF . CRLF;
-        $subject = 'Password Check results for ' . $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'];
+        $subject = 'Password Check results for ' . ($GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'] ?? '');
 
         foreach ($users as $user) {
             $message .= $user['username'] . ' (uid: ' . $user['uid'] . ')';

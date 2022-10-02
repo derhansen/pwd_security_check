@@ -84,7 +84,7 @@ class PopularPasswordService
         $passwordsFile = GeneralUtility::getFileAbsFileName($filename);
 
         if (!file_exists($passwordsFile)) {
-            throw new FileDoesNotExistException('Given Password file does not exist.', 1558846456820);
+            throw new FileDoesNotExistException('Given Password file does not exist.', 1558846456);
         }
 
         $weakPasswords = file($passwordsFile, FILE_IGNORE_NEW_LINES);
@@ -138,7 +138,7 @@ class PopularPasswordService
                 )
             )
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
     }
 
     /**
@@ -158,6 +158,6 @@ class PopularPasswordService
             ->select('uid', 'username', 'password', 'disable')
             ->from(self::TABLE_FE_USERS)
             ->execute()
-            ->fetchAll();
+            ->fetchAllAssociative();
     }
 }
