@@ -1,6 +1,6 @@
-<h3><f:translate key="report_type.{report_type}.title" /></h3>
+<h3><f:translate extensionName="PwdSecurityCheck" key="report_type.{report_type}.title" /></h3>
 
-<h3><f:translate key="mode.0.title" /></h3>
+<h3><f:translate extensionName="PwdSecurityCheck" key="mode.0.title" /></h3>
 
 <f:if condition="!{data.mode-0.checked}">
   <f:then>
@@ -8,7 +8,7 @@
   </f:then>
   <f:else>
     <p>
-      <f:translate key="title.last_check" /> {data.mode-0.lastCheck -> f:format.date(format: 'd.m.Y H:i:s')}
+      <f:translate extensionName="PwdSecurityCheck" key="title.last_check" /> {data.mode-0.lastCheck -> f:format.date(format: 'd.m.Y H:i:s')}
     </p>
     <f:if condition="{data.mode-0.users}">
       <f:then>
@@ -22,7 +22,7 @@
   </f:else>
 </f:if>
 
-<h3><f:translate key="mode.1.title" /></h3>
+<h3><f:translate extensionName="PwdSecurityCheck" key="mode.1.title" /></h3>
 
 <f:if condition="!{data.mode-1.checked}">
   <f:then>
@@ -30,7 +30,7 @@
   </f:then>
   <f:else>
     <p>
-      <f:translate key="title.last_check" /> {data.mode-1.lastCheck -> f:format.date(format: 'd.m.Y H:i:s')}
+      <f:translate extensionName="PwdSecurityCheck" key="title.last_check" /> {data.mode-1.lastCheck -> f:format.date(format: 'd.m.Y H:i:s')}
     </p>
     <f:if condition="{data.mode-1.users}">
       <f:then>
@@ -44,7 +44,7 @@
   </f:else>
 </f:if>
 
-<h3><f:translate key="mode.2.title" /></h3>
+<h3><f:translate extensionName="PwdSecurityCheck" key="mode.2.title" /></h3>
 
 <f:if condition="!{data.mode-2.checked}">
   <f:then>
@@ -52,7 +52,7 @@
   </f:then>
   <f:else>
     <p>
-      <f:translate key="title.last_check" /> {data.mode-2.lastCheck -> f:format.date(format: 'd.m.Y H:i:s')}
+      <f:translate extensionName="PwdSecurityCheck" key="title.last_check" /> {data.mode-2.lastCheck -> f:format.date(format: 'd.m.Y H:i:s')}
     </p>
     <f:if condition="{data.mode-2.users}">
       <f:then>

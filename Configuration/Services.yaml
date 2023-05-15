@@ -1,15 +1,15 @@
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        public: false
+  _defaults:
+    autowire: true
+    autoconfigure: true
+    public: false
 
-    Derhansen\PwdSecurityCheck\:
-        resource: '../Classes/*'
+  Derhansen\PwdSecurityCheck\:
+    resource: '../Classes/*'
 
-    Derhansen\PwdSecurityCheck\Command\ProcessCommand:
-        tags:
-            - name: 'console.command'
-              command: 'pwd_security_check:process'
-              description: 'Checks passwords of TYPO3 backend or frontend users against a file with popular password'
-              schedulable: true
+  Derhansen\PwdSecurityCheck\Command\ProcessCommand:
+    tags:
+      - name: 'console.command'
+        command: 'pwd_security_check:process'
+        description: 'Checks passwords of TYPO3 backend or frontend users against a file with popular password'
+        schedulable: true

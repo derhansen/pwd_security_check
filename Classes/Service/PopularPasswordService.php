@@ -17,27 +17,23 @@ use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Saltedpasswords\Salt\SaltFactory;
-use TYPO3\CMS\Saltedpasswords\Utility\SaltedPasswordsUtility;
 
 /**
  * Class with helpers to check TYPO3 user passwords
  */
 class PopularPasswordService
 {
-    const MODE_BE_ADMIN = 0;
-    const MODE_BE_USERS = 1;
-    const MODE_FE_USERS = 2;
-    const TABLE_FE_USERS = 'fe_users';
-    const TABLE_BE_USERS = 'be_users';
+    private const MODE_BE_ADMIN = 0;
+    private const MODE_BE_USERS = 1;
+    private const MODE_FE_USERS = 2;
+    private const TABLE_FE_USERS = 'fe_users';
+    private const TABLE_BE_USERS = 'be_users';
 
     protected int $mode = 0;
     protected string $checkMode = 'BE';
 
     /**
      * PopularPasswordService constructor.
-     *
-     * @param int $mode
      */
     public function __construct(int $mode)
     {
@@ -49,9 +45,6 @@ class PopularPasswordService
 
     /**
      * Returns an array with users depending on the given mode
-     *
-     * @param int $mode
-     * @return array
      */
     public function getUsers(int $mode): array
     {
@@ -73,11 +66,6 @@ class PopularPasswordService
 
     /**
      * Returns an array with $amountPasswords passwords from the given password file
-     *
-     * @param string $filename
-     * @param int $amountPasswords
-     * @return array
-     * @throws FileDoesNotExistException
      */
     public function getCheckPasswords(string $filename, int $amountPasswords): array
     {
@@ -98,9 +86,6 @@ class PopularPasswordService
 
     /**
      * Returns the hashing instance
-     *
-     * @return \TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashInterface|null
-     * @throws \TYPO3\CMS\Core\Crypto\PasswordHashing\InvalidPasswordHashException
      */
     public function getHashInstance(): ?PasswordHashInterface
     {
@@ -116,9 +101,6 @@ class PopularPasswordService
 
     /**
      * Returns an array of TYPO3 backend users
-     *
-     * @param bool $isAdmin
-     * @return array
      */
     protected function getBackendUsers(bool $isAdmin): array
     {
@@ -137,14 +119,12 @@ class PopularPasswordService
                     $queryBuilder->createNamedParameter((int)$isAdmin, \PDO::PARAM_INT)
                 )
             )
-            ->execute()
+            ->executeQuery()
             ->fetchAllAssociative();
     }
 
     /**
      * Returns an aray of TYPO3 frontend users
-     *
-     * @return array
      */
     protected function getFrontendUsers(): array
     {
@@ -157,7 +137,7 @@ class PopularPasswordService
         return $queryBuilder
             ->select('uid', 'username', 'password', 'disable')
             ->from(self::TABLE_FE_USERS)
-            ->execute()
+            ->executeQuery()
             ->fetchAllAssociative();
     }
 }

@@ -14,7 +14,6 @@ namespace Derhansen\PwdSecurityCheck\Reports;
 use Derhansen\PwdSecurityCheck\Service\ReportDataService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
-use TYPO3\CMS\Reports\Controller\ReportController;
 use TYPO3\CMS\Reports\ReportInterface;
 
 /**
@@ -22,24 +21,32 @@ use TYPO3\CMS\Reports\ReportInterface;
  */
 class PasswordSecurityCheckReport implements ReportInterface
 {
-    protected ?ReportController $reportsModule;
-    protected ?ReportDataService $reportDataService = null;
-
-    /**
-     * Constructor
-     *
-     * @param ReportController $reportsModule Back-reference to the calling reports module
-     */
-    public function __construct(ReportController $reportsModule)
+    public function __construct(protected readonly ReportDataService $reportDataService)
     {
-        $this->reportsModule = $reportsModule;
-        $this->reportDataService = GeneralUtility::makeInstance(ReportDataService::class);
+    }
+
+    public function getIdentifier(): string
+    {
+        return 'tx_pwdsecuritycheck';
+    }
+
+    public function getTitle(): string
+    {
+        return 'LLL:EXT:pwd_security_check/Resources/Private/Language/locallang.xlf:report.title';
+    }
+
+    public function getDescription(): string
+    {
+        return 'LLL:EXT:pwd_security_check/Resources/Private/Language/locallang.xlf:report.description';
+    }
+
+    public function getIconIdentifier(): string
+    {
+        return 'EXT:pwd_security_check/Resources/Public/Icons/report.svg';
     }
 
     /**
      * This method renders the report
-     *
-     * @return string The status report as HTML
      */
     public function getReport(): string
     {
@@ -52,15 +59,11 @@ class PasswordSecurityCheckReport implements ReportInterface
 
     /**
      * Returns the view used to render the report
-     *
-     * @return object|StandaloneView
-     * @throws \TYPO3\CMS\Extbase\Mvc\Exception\InvalidExtensionNameException
      */
     protected function getStandaloneView(): StandaloneView
     {
         // Rendering of the output via fluid
         $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->getRequest()->setControllerExtensionName('PwdSecurityCheck');
         $view->setPartialRootPaths(['EXT:pwd_security_check/Resources/Private/Partials/']);
         $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName(
             'EXT:pwd_security_check/Resources/Private/Templates/Report.html'

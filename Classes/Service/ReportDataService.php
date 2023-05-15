@@ -19,8 +19,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ReportDataService
 {
-    const REGISTRY_NAMESPACE = 'tx_pwdsecuritycheck';
-    const REGISTRY_KEY = 'reportData';
+    private const REGISTRY_NAMESPACE = 'tx_pwdsecuritycheck';
+    private const REGISTRY_KEY = 'reportData';
 
     protected ?Registry $registry = null;
     protected array $defaultData = [
@@ -54,8 +54,6 @@ class ReportDataService
 
     /**
      * Returns data from the registry
-     *
-     * @return array
      */
     public function getData(): array
     {
@@ -64,11 +62,6 @@ class ReportDataService
 
     /**
      * Sets data in the registry
-     *
-     * @param array $data
-     * @param int $mode
-     * @param int $amountPasswords
-     * @throws \Exception
      */
     public function setData(array $data, int $mode, int $amountPasswords): void
     {

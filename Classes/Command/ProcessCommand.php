@@ -31,10 +31,7 @@ class ProcessCommand extends Command
 {
     protected array $allowedModes = [0, 1, 2];
 
-    /**
-     * Configuring the command options
-     */
-    public function configure()
+    public function configure(): void
     {
         $this
             ->addArgument(
@@ -65,10 +62,6 @@ class ProcessCommand extends Command
 
     /**
      * Execute the command
-     *
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     * @return int|void|null
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -87,6 +80,7 @@ class ProcessCommand extends Command
         $passwordFile = $input->getOption('passwordFile');
         $recipients = $input->getArgument('recipients');
 
+        /** @var PopularPasswordService $popularPasswordService */
         $popularPasswordService = GeneralUtility::makeInstance(PopularPasswordService::class, $mode);
         $reportDataService = GeneralUtility::makeInstance(ReportDataService::class);
         $checkPasswords = $popularPasswordService->getCheckPasswords($passwordFile, $amountPasswords);
@@ -156,15 +150,12 @@ class ProcessCommand extends Command
         } else {
             $io->success('All done!');
         }
-        
-        return 0;
+
+        return Command::SUCCESS;
     }
 
     /**
      * Prints the result as table
-     *
-     * @param SymfonyStyle $io
-     * @param array $users
      */
     protected function printResultTable(SymfonyStyle $io, array $users): void
     {
@@ -179,10 +170,6 @@ class ProcessCommand extends Command
 
     /**
      * Prints the command header
-     *
-     * @param SymfonyStyle $io
-     * @param int $mode
-     * @param int $amountPasswords
      */
     protected function printCommandHeader(SymfonyStyle $io, int $mode, int $amountPasswords): void
     {
@@ -202,10 +189,6 @@ class ProcessCommand extends Command
 
     /**
      * Sents a notification email to the given list of recipients
-     *
-     * @param array $recipients
-     * @param array $users
-     * @param int $mode
      */
     protected function sendResultMail(array $recipients, array $users, int $mode): void
     {
