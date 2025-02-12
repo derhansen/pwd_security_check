@@ -63,7 +63,7 @@ class ProcessCommand extends Command
     /**
      * Execute the command
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         ProgressBar::setFormatDefinition('custom', ' %current%/%max% -- %message%');
         $usersWithMatchingPasswords = [];
