@@ -12,17 +12,17 @@ namespace Derhansen\PwdSecurityCheck\Reports;
  */
 
 use Derhansen\PwdSecurityCheck\Service\ReportDataService;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
-use TYPO3\CMS\Reports\ReportInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use TYPO3\CMS\Core\View\ViewFactoryData;
+use TYPO3\CMS\Core\View\ViewFactoryInterface;
+use TYPO3\CMS\Reports\RequestAwareReportInterface;
 
-/**
- * Password Security Check Report
- */
-class PasswordSecurityCheckReport implements ReportInterface
+class PasswordSecurityCheckReport implements RequestAwareReportInterface
 {
-    public function __construct(protected readonly ReportDataService $reportDataService)
-    {
+    public function __construct(
+        protected readonly ReportDataService $reportDataService,
+        private readonly ViewFactoryInterface $viewFactory
+    ) {
     }
 
     public function getIdentifier(): string
@@ -45,29 +45,21 @@ class PasswordSecurityCheckReport implements ReportInterface
         return 'EXT:pwd_security_check/Resources/Public/Icons/report.svg';
     }
 
-    /**
-     * This method renders the report
-     */
-    public function getReport(): string
+    public function getReport(?ServerRequestInterface $request = null): string
     {
-        $view = $this->getStandaloneView();
+        if (!$request) {
+            throw new \RuntimeException('No request object provided');
+        }
+
+        $viewFactoryData = new ViewFactoryData(
+            partialRootPaths: ['EXT:pwd_security_check/Resources/Private/Partials/'],
+            templatePathAndFilename: 'EXT:pwd_security_check/Resources/Private/Templates/Report.html',
+            request: $request,
+        );
+        $view = $this->viewFactory->create($viewFactoryData);
         $view->assignMultiple([
             'data' => $this->reportDataService->getData()
         ]);
         return $view->render();
-    }
-
-    /**
-     * Returns the view used to render the report
-     */
-    protected function getStandaloneView(): StandaloneView
-    {
-        // Rendering of the output via fluid
-        $view = GeneralUtility::makeInstance(StandaloneView::class);
-        $view->setPartialRootPaths(['EXT:pwd_security_check/Resources/Private/Partials/']);
-        $view->setTemplatePathAndFilename(GeneralUtility::getFileAbsFileName(
-            'EXT:pwd_security_check/Resources/Private/Templates/Report.html'
-        ));
-        return $view;
     }
 }

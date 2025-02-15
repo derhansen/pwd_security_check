@@ -81,7 +81,7 @@ class ProcessCommand extends Command
         $recipients = $input->getArgument('recipients');
 
         /** @var PopularPasswordService $popularPasswordService */
-        $popularPasswordService = GeneralUtility::makeInstance(PopularPasswordService::class, $mode);
+        $popularPasswordService = GeneralUtility::makeInstance(PopularPasswordService::class);
         $reportDataService = GeneralUtility::makeInstance(ReportDataService::class);
         $checkPasswords = $popularPasswordService->getCheckPasswords($passwordFile, $amountPasswords);
 
@@ -98,7 +98,7 @@ class ProcessCommand extends Command
                 $passwordsProgressbar->setMessage('Checking user: ' . $user['username']);
                 $passwordsProgressbar->start();
 
-                $hashInstance = $popularPasswordService->getHashInstance();
+                $hashInstance = $popularPasswordService->getHashInstance($mode);
 
                 if ($hashInstance) {
                     $passwordMatch = false;
@@ -192,16 +192,11 @@ class ProcessCommand extends Command
      */
     protected function sendResultMail(array $recipients, array $users, int $mode): void
     {
-        switch ($mode) {
-            case 1:
-                $userType = 'Backend';
-                break;
-            case 2:
-                $userType = 'Frontend';
-                break;
-            default:
-                $userType = 'Backend Admins';
-        }
+        $userType = match ($mode) {
+            1 => 'Backend',
+            2 => 'Frontend',
+            default => 'Backend Admins',
+        };
         $message = 'The following ' . $userType . ' users have a password found in the popular password file:';
         $message .= CRLF . CRLF;
         $subject = 'Password Check results for ' . ($GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'] ?? '');

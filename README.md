@@ -42,9 +42,9 @@ amount of passwords to check.
 
 ### CLI Arguments and Options
 
-Command: `bin/typo3 pwd_security_check:process`
+Command: `./vendor/bin/typo3 pwd_security_check:process`
 
-Get Help: `bin/typo3 help pwd_security_check:process`
+Get Help: `./vendor/bin/typo3 help pwd_security_check:process`
 
 Command arguments:
 

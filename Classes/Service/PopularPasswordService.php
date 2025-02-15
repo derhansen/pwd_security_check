@@ -13,6 +13,7 @@ namespace Derhansen\PwdSecurityCheck\Service;
 
 use TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashFactory;
 use TYPO3\CMS\Core\Crypto\PasswordHashing\PasswordHashInterface;
+use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Resource\Exception\FileDoesNotExistException;
@@ -29,39 +30,17 @@ class PopularPasswordService
     private const TABLE_FE_USERS = 'fe_users';
     private const TABLE_BE_USERS = 'be_users';
 
-    protected int $mode = 0;
-    protected string $checkMode = 'BE';
-
-    /**
-     * PopularPasswordService constructor.
-     */
-    public function __construct(int $mode)
-    {
-        $this->mode = $mode;
-        if ($mode === 2) {
-            $this->checkMode = 'FE';
-        }
-    }
-
     /**
      * Returns an array with users depending on the given mode
      */
     public function getUsers(int $mode): array
     {
-        switch ($mode) {
-            case self::MODE_BE_ADMIN:
-                $users = $this->getBackendUsers(true);
-                break;
-            case self::MODE_BE_USERS:
-                $users = $this->getBackendUsers(false);
-                break;
-            case self::MODE_FE_USERS:
-                $users = $this->getFrontendUsers();
-                break;
-            default:
-                $users = [];
-        }
-        return $users;
+        return match ($mode) {
+            self::MODE_BE_ADMIN => $this->getBackendUsers(true),
+            self::MODE_BE_USERS => $this->getBackendUsers(false),
+            self::MODE_FE_USERS => $this->getFrontendUsers(),
+            default => [],
+        };
     }
 
     /**
@@ -87,13 +66,14 @@ class PopularPasswordService
     /**
      * Returns the hashing instance
      */
-    public function getHashInstance(): ?PasswordHashInterface
+    public function getHashInstance(int $mode): ?PasswordHashInterface
     {
         $hashInstance = null;
 
+        $checkMode = $this->getCheckMode($mode);
         if (class_exists(PasswordHashFactory::class)) {
             $hashInstance = GeneralUtility::makeInstance(PasswordHashFactory::class)
-                ->getDefaultHashInstance($this->checkMode);
+                ->getDefaultHashInstance($checkMode);
         }
 
         return $hashInstance;
@@ -116,7 +96,7 @@ class PopularPasswordService
             ->where(
                 $queryBuilder->expr()->eq(
                     'admin',
-                    $queryBuilder->createNamedParameter((int)$isAdmin, \PDO::PARAM_INT)
+                    $queryBuilder->createNamedParameter((int)$isAdmin, Connection::PARAM_INT)
                 )
             )
             ->executeQuery()
@@ -139,5 +119,17 @@ class PopularPasswordService
             ->from(self::TABLE_FE_USERS)
             ->executeQuery()
             ->fetchAllAssociative();
+    }
+
+    /**
+     * Returns the checkMode
+     */
+    protected function getCheckMode(int $mode): string
+    {
+        $checkMode = 'BE';
+        if ($mode === self::MODE_FE_USERS) {
+            $checkMode = 'FE';
+        }
+        return $checkMode;
     }
 }

@@ -44,9 +44,6 @@ class ReportDataService
         ],
     ];
 
-    /**
-     * ReportDataService constructor.
-     */
     public function __construct()
     {
         $this->registry = GeneralUtility::makeInstance(Registry::class);

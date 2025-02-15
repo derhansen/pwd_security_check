@@ -1,15 +1,23 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+      xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+      data-namespace-typo3-fluid="true">
+
 <div class="callout callout-info">
-  <div class="media">
-    <div class="media-left">
-      <span class="fa-stack fa-lg callout-icon"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-info fa-stack-1x"></i></span>
-    </div>
-    <div class="media-body">
-      <h4 class="callout-title"><f:translate extensionName="PwdSecurityCheck" key="title.never_checked" /></h4>
-      <div class="callout-body">
-        <p>
-          <f:translate extensionName="PwdSecurityCheck" key="message.never_checked" arguments="{0: mode}" />
-        </p>
-      </div>
+  <div class="callout-icon">
+      <span class="icon-emphasized">
+        <core:icon identifier="actions-info"/>
+      </span>
+  </div>
+  <div class="callout-content">
+    <h4 class="callout-title">
+      <f:translate extensionName="PwdSecurityCheck" key="title.never_checked" />
+    </h4>
+    <div class="callout-body">
+      <p>
+        <f:translate extensionName="PwdSecurityCheck" key="message.never_checked" arguments="{0: mode}" />
+      </p>
     </div>
   </div>
 </div>
+
+</html>
