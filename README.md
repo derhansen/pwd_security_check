@@ -74,6 +74,10 @@ checks and the task may take hours/days/weeks/years.
 The extension is hosted on GitHub. Please report feedback, bugs and changerequests directly at
 https://github.com/derhansen/pwd_security_check
 
+## Reporting a Vulnerability
+
+Please report vulnerabilities to [security@typo3.org](mailto:security@typo3.org).
+
 ## Credits
 
 ### Password file
