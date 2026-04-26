@@ -13,6 +13,7 @@ namespace Derhansen\PwdSecurityCheck\Command;
 
 use Derhansen\PwdSecurityCheck\Service\PopularPasswordService;
 use Derhansen\PwdSecurityCheck\Service\ReportDataService;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\Table;
@@ -27,6 +28,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Command to check the password of TYPO3 backend or frontend users against a given list of popular passwords
  */
+#[AsCommand('pwd_security_check:process', 'Checks passwords of TYPO3 backend or frontend users against a file with popular password')]
 class ProcessCommand extends Command
 {
     protected array $allowedModes = [0, 1, 2];

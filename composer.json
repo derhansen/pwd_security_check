@@ -19,10 +19,7 @@
     "GPL-2.0-or-later"
   ],
   "require": {
-    "typo3/cms-core": "^13.4"
-  },
-  "replace": {
-    "typo3-ter/pwd-security-check": "self.version"
+    "typo3/cms-core": "^14.3"
   },
   "autoload": {
     "psr-4": {
@@ -32,7 +29,10 @@
   "extra": {
     "typo3/cms": {
       "extension-key": "pwd_security_check",
-      "cms-package-dir": "{$vendor-dir}/typo3/cms"
+      "version": "6.0.0",
+      "Package": {
+        "providesPackages": []
+      }
     }
   }
 }
